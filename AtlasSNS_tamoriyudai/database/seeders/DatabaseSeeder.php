@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        //10人のランダムユーザーを生成
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        //特定のユーザーを作成
+        \App\Models\User::factory()->create([
+            'username' => 'Test User',//ユーザー名
+            'email' => 'test@aaaa.com',//メールアドレス
+            'password' => Hash::make('aaaa'),//暗号化されたパスワード
+        ]);
     }
 }

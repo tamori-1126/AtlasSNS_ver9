@@ -13,12 +13,12 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
+        Schema::create('posts', function (Blueprint $table) { //postsテーブルのマイグレーション
+            $table->integer('id')->autoIncrement();//id();の形でないためautoIncrementが必要
             $table->unsignedBigInteger('user_id'); // user_idをunsignedBigIntegerに変更
-            $table->string('post', 400);
+            $table->string('post', 400);//stringのはpostのvarchar400
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
+            $table->timestamp('updated_at')->useCurrent()->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
 
             // 外部キー制約を追加
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

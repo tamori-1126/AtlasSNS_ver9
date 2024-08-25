@@ -13,12 +13,12 @@ class CreateFollowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) { //followsテーブルのマイグレーション
             $table->id();
             $table->unsignedBigInteger('following_id');
             $table->unsignedBigInteger('followed_id');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
+            $table->timestamp('updated_at')->useCurrent()->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
 
             // 外部キー制約を追加（別途Modelに記載必要）
             $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade');
